@@ -2,6 +2,10 @@ plugins {
 	id 'net.fabricmc.fabric-loom' version "${loom_version}"
 	id 'maven-publish'
 }
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs.remove("-Werror")
+}
+
 
 version = project.mod_version
 group = project.maven_group
@@ -72,9 +76,7 @@ publishing {
 		create("mavenJava", MavenPublication) {
 			from components.java
 		}
-	}tasks.withType(JavaCompile).configureEach {
-    options.compilerArgs.remove("-Werror")
-	}
+	
 	
 
 	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
